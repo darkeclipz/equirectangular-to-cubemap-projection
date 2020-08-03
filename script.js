@@ -20,22 +20,30 @@ let setCursorPosition = function(x, y) {
     cursor.x = x / w * iw;
     cursor.y = y / h * ih;
 }
+
 sourceCanvas.addEventListener('mousedown', 
-    () => isMoving = true, false);
+    () => isMoving = true, 
+    false
+);
+
 sourceCanvas.addEventListener('mouseup', 
     () => { 
         isMoving = false; 
         setCursorPosition(event.pageX - sourceCanvas.offsetLeft,
                           event.pageY - sourceCanvas.offsetTop);
         setTimeout(() => map(), 200);
-    }, false);
+    }, 
+    false
+);
+
 sourceCanvas.addEventListener('mousemove', () => {
     if(isMoving) {
         setCursorPosition(event.pageX - sourceCanvas.offsetLeft,
                           event.pageY - sourceCanvas.offsetTop);
         map();
-    }
-}, false);
+    }}, 
+    false
+);
 
 // Animate the drawing of the cursor on the source canvas.
 sourceCanvas.width = w; sourceCanvas.height = h;
@@ -56,7 +64,9 @@ function animateSourceMapCanvas() {
 const canvas = document.getElementById('projection-canvas');
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, w / h, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+const renderer = new THREE.WebGLRenderer({ 
+    canvas: canvas, antialias: true, alpha: true 
+});
 renderer.setSize(w, h);
 const controls = new THREE.OrbitControls(camera, renderer.domElement);
 const light = new THREE.AmbientLight(0xafafaf);
@@ -108,7 +118,9 @@ const dotGeometry = new THREE.BufferGeometry();
 const numOfPoints = 2;
 const positions = new Float32Array(3 * numOfPoints);
 dotGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-const dotMaterial = new THREE.PointsMaterial({ size: 6, color: 0xff0000, sizeAttenuation: false });
+const dotMaterial = new THREE.PointsMaterial({ 
+    size: 6, color: 0xff0000, sizeAttenuation: false 
+});
 const dot = new THREE.Points(dotGeometry, dotMaterial);
 scene.add(dot);
 
