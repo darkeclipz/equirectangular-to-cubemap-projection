@@ -198,10 +198,6 @@ function mapPlane(plane) {
         for(let y = 0; y < size; y++) {
 
             let p = getPlanePosition(x, y, size, plane);
-
-            // here we need to calculate the intersection between P and the sphere
-            // otherwise the mapping to spherical coordinates is not entirely correct. 
-
             let theta = Math.atan2(p.y, p.x);
             
             if(theta < 0) {
@@ -209,15 +205,12 @@ function mapPlane(plane) {
             }
 
             let r = Math.sqrt(p.x * p.x + p.y * p.y + p.z * p.z);
-            let phi = Math.acos(p.z / r); // mapping is distorted if z is constant
+            let phi = Math.acos(p.z / r);
 
-            let u = theta / Math.PI2;
-            let v = phi / Math.PI;
+            let u = theta / Math.PI2 * w;
+            let v = phi / Math.PI * h;
 
-            let tx = u * w;
-            let ty = v * h;
-
-            ctx.drawImage(sourceCanvas, tx, ty, 1, 1, x, y, 1, 1);
+            ctx.drawImage(sourceCanvas, u, v, 1, 1, x, y, 1, 1);
         }
     }
 
