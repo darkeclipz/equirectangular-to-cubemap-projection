@@ -143,6 +143,8 @@ function animate() {
     const v = cursor.y / ih;
     const theta = u * Math.PI2 - Math.PI / 2;
     const phi = v * Math.PI;
+
+    // Left-handed coordinate system
     const z = Math.cos(theta) * Math.sin(phi);
     const x = Math.sin(theta) * Math.sin(phi);
     const y = Math.cos(phi);
