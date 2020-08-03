@@ -164,8 +164,7 @@ function animate() {
     renderer.render(scene, camera);
 }
 
-let planeCanvas;
-let cubeMapCanvas = [];
+
 let output = document.getElementById('output');
 
 function map(size=100) {
@@ -177,9 +176,9 @@ function map(size=100) {
         mapPlane("y-", size);
         mapPlane("z+", size);
         mapPlane("z-", size);
-        let images = [cubeMapCanvas.xpos, cubeMapCanvas.xneg, 
-                      cubeMapCanvas.zpos, cubeMapCanvas.zneg,
-                      cubeMapCanvas.ypos, cubeMapCanvas.yneg];
+        let images = [planeCanvasArray.xpos, planeCanvasArray.xneg, 
+                      planeCanvasArray.zpos, planeCanvasArray.zneg,
+                      planeCanvasArray.ypos, planeCanvasArray.yneg];
         let cubeTexture = new THREE.CubeTexture(images);
         scene.background = cubeTexture;
         scene.needsUpdate = true;
@@ -219,12 +218,14 @@ let getPointOnUnitCubePlane = function(x, y, plane) {
     }
 }
 
+let planeCanvasArray = [];
+
 function mapPlane(plane, size) {
 
     // + or - isn't used in id's, so convert to something friendly. 
     let planeName = plane.replace('+', 'pos').replace('-', 'neg');
-    cubeMapCanvas[planeName] = document.createElement('canvas');
-    planeCanvas = cubeMapCanvas[planeName];
+    planeCanvasArray[planeName] = document.createElement('canvas');
+    planeCanvas = planeCanvasArray[planeName];
     planeCanvas.width = planeCanvas.height = size;
     planeCanvas.imageSmoothingEnabled = false;
     let ctx = planeCanvas.getContext('2d');    
