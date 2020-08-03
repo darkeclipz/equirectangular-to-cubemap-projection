@@ -69,16 +69,19 @@
             
             <section>
                 <h2>Equirectangular map</h2>
+                <p>This is a panorama (equirectangular) image, which is 360 degrees along the x-axis, and 180 degrees along the y-axis. Move the cursor to show where the pixel is projected to.</p>
                 <canvas id="source-map"></canvas>
             </section>
             <section>
                 <h2>Projection mapping</h2>
+                <p>The panorama image is wrapped around a sphere. If we take a point on the face of the cube, and draw a line, we can find the correct color where the line intersects the sphere.</p>
                 <canvas id="projection-canvas"></canvas>
             </section>
             
         </div>
         <section>
             <h2>Cube map</h2>
+            <p>Then we go along all the faces of the cube, and all the pixels, and project the color. This results in a cube map.</p>
             <div class="cubemap checker-pattern">
                 <div class="plane white"></div>
                 <div class="plane">
@@ -114,7 +117,7 @@
             <button onclick="map(500)">Render Low</button>
             <button onclick="map(1000)">Render Medium</button>
             <button onclick="map(2000)">Render High (takes long!)</button>
-            <div id="output"></div>
+            <span id="output"></span>
         </section>    
         <script src="script.js"></script>
     </body>
